@@ -125,30 +125,4 @@ Simulação da Alocação de Blocos:
     4. EXEMPLOS DE USO E COMPARAÇÃO COM COMANDOS LINUX REAIS
 A tabela abaixo correlaciona o comportamento observado no simulador com a resposta 
 esperada em um terminal de uma distribuição GNU/Linux real (como Ubuntu ou Debian):
-
-
-| Comando Executado| Comportamento no Simulador     | Comportamento no Linux Real    |
-
-| su elliot             | Altera a variável USUARIOATUAL  | Alterna a sessão de usuário    |
-|                       | mudando as checagens de bitmask| via chamada setuid / PAM.      |
-
-| touch arq.txt         | Cria o arquivo vazio no vector | Cria o arquivo alocando um     |
-|                       | informando o ID/Inode criado.  | número de Inode vago na tabela.|
-
-| echo teste > arq.txt  | Grava os caracteres de forma   | Grava os blocos de dados nos   |
-|                       | contígua no DISCOSIMULADO.     | setores do bloco do HD/SSD.    |
-
-| cat arq.txt           | Exibe a mensagem de leitura do | Lê os blocos apontados pelo    |
-|                       | bloco e cospe os caracteres.   | Inode do arquivo para o stdout.|
-
-| cp arq.txt copia.txt  | Verifica o tamanho livre no    | Realiza a leitura e escrita do |
-|                       | disco; se houver, clona o nó.  | conteúdo gerando novo Inode.   |
-
-| mv arq.txt b.txt      | Altera a string 'nome' dentro  | Altera a entrada de diretório  |
-|                       | da struct ARQUIVO na lista.    | mantendo o mesmo número Inode. |
-
-| rm b.txt              | Remove o elemento da lista de  | Desvincula o link do arquivo;  |
-|                       | arquivos limpando a referência.| libera os blocos se linkcnt=0. |
-
-| cd ..                 | Atualiza o ponteiro atual para | Altera o diretório de trabalho |
-|                       | o ponteiro armazenado em 'pai' | do processo para a pasta pai.  |
+<img width="1037" height="594" alt="image" src="https://github.com/user-attachments/assets/9178dc41-16a0-4e8d-b1c8-25f60a5b1e48" />
